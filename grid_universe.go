@@ -14,14 +14,14 @@ type GridUniverse struct {
 
 // NewGridUniverse creates a Universe of the specified size.
 // It also generates an initial randome state with ~25% alive cells.
-func NewGridUniverse(w, h int) Universe {
-	grid := createGrid(w, h)
-	for i := 0; i < (w * h / 4); i++ {
-		grid[rand.Intn(h)][rand.Intn(w)] = true
+func NewGridUniverse(width, height int) Universe {
+	grid := createGrid(width, height)
+	for i := 0; i < (width * height / 4); i++ {
+		grid[rand.Intn(height)][rand.Intn(width)] = true
 	}
 	return GridUniverse{
-		width:  w,
-		height: h,
+		width:  width,
+		height: height,
 		grid:   grid,
 	}
 }
@@ -33,7 +33,7 @@ func (u GridUniverse) Apply(rules Rules) Universe {
 
 	for y := 0; y < u.height; y++ {
 		for x := 0; x < u.width; x++ {
-			future[y][x] = rules(u.grid[y][x], u.aliveNeighbours(x, y))
+			future[y][x] = rules(u.grid[y][x], u.neighbours(x, y))
 		}
 	}
 
@@ -58,11 +58,11 @@ func (u GridUniverse) String() string {
 	return buf.String()
 }
 
-func (u GridUniverse) aliveNeighbours(x, y int) (n int) {
+func (u GridUniverse) neighbours(x, y int) (count int) {
 	for i := -1; i <= 1; i++ {
 		for j := -1; j <= 1; j++ {
 			if (j != 0 || i != 0) && u.wrap(x+i, y+j) {
-				n++
+				count++
 			}
 		}
 	}
@@ -76,10 +76,10 @@ func (u GridUniverse) wrap(x, y int) bool {
 	return u.grid[wrapped_y][wrapped_x]
 }
 
-func createGrid(w, h int) [][]bool {
-	g := make([][]bool, h)
-	for i := range g {
-		g[i] = make([]bool, w)
+func createGrid(width, height int) [][]bool {
+	grid := make([][]bool, height)
+	for i := range grid {
+		grid[i] = make([]bool, width)
 	}
-	return g
+	return grid
 }

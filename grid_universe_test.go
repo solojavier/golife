@@ -15,8 +15,7 @@ func TestSeed(t *testing.T) {
 
 func TestApply(t *testing.T) {
 	u := NewGridUniverse(10, 10)
-
-	nu := u.Apply(func(a bool, n int) bool {
+	nu := u.Apply(func(alive bool, neighbours int) bool {
 		return false
 	})
 
@@ -38,11 +37,9 @@ func TestWrap(t *testing.T) {
 		{0, 4, 0, 14},
 		{5, 5, 15, 15},
 	}
-
 	u := NewGridUniverse(10, 10).(GridUniverse)
 
 	for _, c := range tests {
-
 		if u.wrap(c.x1, c.y1) != u.wrap(c.x2, c.y2) {
 			t.Error(
 				"Universe is not wrapped correctly:",
