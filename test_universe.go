@@ -4,13 +4,8 @@ type TestUniverse struct {
 	cell Cell
 }
 
-type TestCell struct {
-	neighbours int
-	alive      bool
-}
-
 func (t TestUniverse) Apply(r Rules) Universe {
-	cell := &TestCell{
+	cell := Cell{
 		alive:      r(t.cell),
 		neighbours: 0,
 	}
@@ -18,17 +13,9 @@ func (t TestUniverse) Apply(r Rules) Universe {
 }
 
 func (t TestUniverse) String() string {
-	if t.cell.Alive() {
+	if t.cell.alive {
 		return "Hello Alive Universe"
 	} else {
 		return "Hello Dead Universe"
 	}
-}
-
-func (c TestCell) Alive() bool {
-	return c.alive
-}
-
-func (c TestCell) LiveNeighbourCount() int {
-	return c.neighbours
 }

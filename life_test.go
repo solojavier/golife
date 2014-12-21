@@ -2,16 +2,16 @@ package main
 
 import "testing"
 
-func newTestUniverse(state bool, neighbours int) *TestUniverse {
-	cell := &TestCell{
-		alive:      state,
+func newTestUniverse(alive bool, neighbours int) *TestUniverse {
+	cell := Cell{
+		alive:      alive,
 		neighbours: neighbours,
 	}
 	return &TestUniverse{cell: cell}
 }
 
 var tests = []struct {
-	state      bool
+	alive      bool
 	neighbours int
 	expected   bool
 }{
@@ -29,13 +29,13 @@ var tests = []struct {
 
 func TestTick(t *testing.T) {
 	for _, c := range tests {
-		u := Tick(newTestUniverse(c.state, c.neighbours), Conway).(TestUniverse)
+		u := Tick(newTestUniverse(c.alive, c.neighbours), Conway).(TestUniverse)
 
-		if u.cell.Alive() != c.expected {
+		if u.cell.alive != c.expected {
 			t.Error(
-				"for (", "neighbours:", c.neighbours, "state:", c.state, ")",
+				"for (", "neighbours:", c.neighbours, "alive:", c.alive, ")",
 				"expected:", c.expected,
-				"got:", u.cell.Alive(),
+				"got:", u.cell.alive,
 			)
 		}
 	}

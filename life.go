@@ -13,10 +13,10 @@ type Universe interface {
 	fmt.Stringer
 }
 
-// Cell is a living being inside a Universe
-type Cell interface {
-	LiveNeighbourCount() int
-	Alive() bool
+// Cell is an entity inside a Universe
+type Cell struct {
+	neighbours int
+	alive      bool
 }
 
 // Tick applies Rules function to the Universe
@@ -27,12 +27,12 @@ func Tick(past Universe, rules Rules) Universe {
 
 // Conway defines default rules for GoL
 func Conway(c Cell) bool {
-	if c.Alive() {
-		if c.LiveNeighbourCount() == 2 || c.LiveNeighbourCount() == 3 {
+	if c.alive {
+		if c.neighbours == 2 || c.neighbours == 3 {
 			return true
 		}
 	} else {
-		if c.LiveNeighbourCount() == 3 {
+		if c.neighbours == 3 {
 			return true
 		}
 	}
