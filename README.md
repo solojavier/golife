@@ -1,6 +1,6 @@
 # Golife
 
-[![travis](https://travis-ci.org/solojavier/golife.svg)]((https://travis-ci.org/solojavier/golife))
+[![travis](https://travis-ci.org/solojavier/golife.svg)](https://travis-ci.org/solojavier/golife)
 
 An implementation of [Conway's Game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) in golang
 
