@@ -19,3 +19,11 @@ func (t TestUniverse) String() string {
 		return "Hello Dead Universe"
 	}
 }
+
+func newTestUniverse(alive bool, neighbours int) *TestUniverse {
+	cell := Cell{
+		alive:      alive,
+		neighbours: neighbours,
+	}
+	return &TestUniverse{cell: cell}
+}

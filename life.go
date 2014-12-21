@@ -19,12 +19,6 @@ type Cell struct {
 	alive      bool
 }
 
-// Tick applies Rules function to the Universe
-// to create a new generation.
-func Tick(past Universe, rules Rules) Universe {
-	return past.Apply(rules)
-}
-
 // Conway defines default rules for GoL
 func Conway(c Cell) bool {
 	if c.alive {
@@ -37,4 +31,10 @@ func Conway(c Cell) bool {
 		}
 	}
 	return false
+}
+
+// Tick applies Rules function to the Universe
+// to create a new generation.
+func Tick(past Universe, rules Rules) Universe {
+	return past.Apply(rules)
 }
