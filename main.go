@@ -11,7 +11,7 @@ func main() {
 }
 
 func evolution(universe Universe, generation int) {
-	fmt.Println("Generation ", generation, ":")
+	fmt.Println("Generation", generation, ":")
 	fmt.Print(universe)
 	time.Sleep(1 * time.Second)
 	evolution(Tick(universe, Conway), generation+1)
