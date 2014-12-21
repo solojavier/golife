@@ -7,12 +7,12 @@ import (
 
 func main() {
 	universe := NewGridUniverse(80, 20)
-	n := 0
-	for {
-		fmt.Println("Generation ", n, ":")
-		fmt.Print(universe)
-		universe = Tick(universe, Conway)
-		time.Sleep(1 * time.Second)
-		n++
-	}
+	evolution(universe, 0)
+}
+
+func evolution(universe Universe, generation int) {
+	fmt.Println("Generation ", generation, ":")
+	fmt.Print(universe)
+	time.Sleep(1 * time.Second)
+	evolution(Tick(universe, Conway), generation+1)
 }

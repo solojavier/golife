@@ -4,8 +4,8 @@
 
 An implementation of [Conway's Game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) in golang
 
-Main program has an infinite loop that uses `Conway`'s rules to generate
-a next universe generation and print it to the screen.
+Main program has a recursive function that uses `Conway`'s rules to generate
+a next universe evolution and print it to the screen every second.
 
 It uses a grid universe with wrapped edges, but it could be switched
 to another type of universe thanks to the usage of interfaces.
