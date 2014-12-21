@@ -2,8 +2,10 @@ package main
 
 import "fmt"
 
-// Rules defines function to be applied to a cell.
-type Rules func(Cell) bool
+// Rules defines function that can be used to determine
+// a cell next state.
+// Returns true if should be alive and false if it should die.
+type Rules func(bool, int) bool
 
 // Universe interface contains a representation of cells
 type Universe interface {
@@ -13,20 +15,14 @@ type Universe interface {
 	fmt.Stringer
 }
 
-// Cell is an entity inside a Universe
-type Cell struct {
-	neighbours int
-	alive      bool
-}
-
 // Conway defines default rules for GoL
-func Conway(c Cell) bool {
-	if c.alive {
-		if c.neighbours == 2 || c.neighbours == 3 {
+func Conway(alive bool, neighbours int) bool {
+	if alive {
+		if neighbours == 2 || neighbours == 3 {
 			return true
 		}
 	} else {
-		if c.neighbours == 3 {
+		if neighbours == 3 {
 			return true
 		}
 	}

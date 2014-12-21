@@ -16,7 +16,7 @@ func TestSeed(t *testing.T) {
 func TestApply(t *testing.T) {
 	u := NewGridUniverse(10, 10)
 
-	nu := u.Apply(func(c Cell) bool {
+	nu := u.Apply(func(a bool, n int) bool {
 		return false
 	})
 

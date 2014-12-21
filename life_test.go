@@ -23,11 +23,11 @@ func TestTick(t *testing.T) {
 	for _, c := range tests {
 		u := Tick(newTestUniverse(c.alive, c.neighbours), Conway).(TestUniverse)
 
-		if u.cell.alive != c.expected {
+		if u.alive != c.expected {
 			t.Error(
 				"for (", "neighbours:", c.neighbours, "alive:", c.alive, ")",
 				"expected:", c.expected,
-				"got:", u.cell.alive,
+				"got:", u.alive,
 			)
 		}
 	}

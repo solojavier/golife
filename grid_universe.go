@@ -13,7 +13,7 @@ type GridUniverse struct {
 }
 
 // NewGridUniverse creates a Universe of the specified size.
-// It also generates an initial randome state with 25% alive cells.
+// It also generates an initial randome state with ~25% alive cells.
 func NewGridUniverse(w, h int) Universe {
 	grid := createGrid(w, h)
 	for i := 0; i < (w * h / 4); i++ {
@@ -33,11 +33,7 @@ func (u GridUniverse) Apply(rules Rules) Universe {
 
 	for y := 0; y < u.height; y++ {
 		for x := 0; x < u.width; x++ {
-			cell := Cell{
-				alive:      u.grid[y][x],
-				neighbours: u.aliveNeighbours(x, y),
-			}
-			future[y][x] = rules(cell)
+			future[y][x] = rules(u.grid[y][x], u.aliveNeighbours(x, y))
 		}
 	}
 

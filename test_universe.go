@@ -1,19 +1,16 @@
 package main
 
 type TestUniverse struct {
-	cell Cell
+	alive      bool
+	neighbours int
 }
 
 func (t TestUniverse) Apply(r Rules) Universe {
-	cell := Cell{
-		alive:      r(t.cell),
-		neighbours: 0,
-	}
-	return TestUniverse{cell: cell}
+	return TestUniverse{alive: r(t.alive, t.neighbours)}
 }
 
 func (t TestUniverse) String() string {
-	if t.cell.alive {
+	if t.alive {
 		return "Hello Alive Universe"
 	} else {
 		return "Hello Dead Universe"
@@ -21,9 +18,8 @@ func (t TestUniverse) String() string {
 }
 
 func newTestUniverse(alive bool, neighbours int) *TestUniverse {
-	cell := Cell{
+	return &TestUniverse{
 		alive:      alive,
 		neighbours: neighbours,
 	}
-	return &TestUniverse{cell: cell}
 }
