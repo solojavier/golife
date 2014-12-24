@@ -1,15 +1,15 @@
-package main
+package golife
 
-type TestUniverse struct {
+type testUniverse struct {
 	alive      bool
 	neighbours int
 }
 
-func (t TestUniverse) Apply(r Rules) Universe {
-	return TestUniverse{alive: r(t.alive, t.neighbours)}
+func (t testUniverse) Apply(r Rules) Universe {
+	return testUniverse{alive: r(t.alive, t.neighbours)}
 }
 
-func (t TestUniverse) String() string {
+func (t testUniverse) String() string {
 	if t.alive {
 		return "Hello Alive Universe"
 	} else {
@@ -17,8 +17,8 @@ func (t TestUniverse) String() string {
 	}
 }
 
-func newTestUniverse(alive bool, neighbours int) *TestUniverse {
-	return &TestUniverse{
+func newTestUniverse(alive bool, neighbours int) *testUniverse {
+	return &testUniverse{
 		alive:      alive,
 		neighbours: neighbours,
 	}

@@ -1,12 +1,12 @@
-package main
+package golife
 
 import (
 	"bytes"
 	"math/rand"
 )
 
-// GridUniverse contains a representation of a rectangular universe
-type GridUniverse struct {
+// gridUniverse contains a representation of a rectangular universe
+type gridUniverse struct {
 	height int
 	width  int
 	grid   [][]bool
@@ -19,7 +19,7 @@ func NewGridUniverse(width, height int) Universe {
 	for i := 0; i < (width * height / 4); i++ {
 		grid[rand.Intn(height)][rand.Intn(width)] = true
 	}
-	return GridUniverse{
+	return gridUniverse{
 		width:  width,
 		height: height,
 		grid:   grid,
@@ -28,7 +28,7 @@ func NewGridUniverse(width, height int) Universe {
 
 // Apply uses the rules to generate a new generation
 // using current universe grid.
-func (u GridUniverse) Apply(rules Rules) Universe {
+func (u gridUniverse) Apply(rules Rules) Universe {
 	future := createGrid(u.width, u.height)
 
 	for y := 0; y < u.height; y++ {
@@ -43,7 +43,7 @@ func (u GridUniverse) Apply(rules Rules) Universe {
 
 // String represents the Universe as a string.
 // Alive cells are marked with an '*'.
-func (u GridUniverse) String() string {
+func (u gridUniverse) String() string {
 	var buf bytes.Buffer
 	for y := 0; y < u.height; y++ {
 		for x := 0; x < u.width; x++ {
@@ -58,7 +58,7 @@ func (u GridUniverse) String() string {
 	return buf.String()
 }
 
-func (u GridUniverse) neighbours(x, y int) (count int) {
+func (u gridUniverse) neighbours(x, y int) (count int) {
 	for i := -1; i <= 1; i++ {
 		for j := -1; j <= 1; j++ {
 			if (j != 0 || i != 0) && u.wrap(x+i, y+j) {
@@ -69,7 +69,7 @@ func (u GridUniverse) neighbours(x, y int) (count int) {
 	return
 }
 
-func (u GridUniverse) wrap(x, y int) bool {
+func (u gridUniverse) wrap(x, y int) bool {
 	wrapped_x := (x + u.width) % u.width
 	wrapped_y := (y + u.height) % u.height
 

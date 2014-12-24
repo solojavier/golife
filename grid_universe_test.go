@@ -1,4 +1,4 @@
-package main
+package golife
 
 import (
 	"strings"
@@ -37,7 +37,7 @@ func TestWrap(t *testing.T) {
 		{0, 4, 0, 14},
 		{5, 5, 15, 15},
 	}
-	u := NewGridUniverse(10, 10).(GridUniverse)
+	u := NewGridUniverse(10, 10).(gridUniverse)
 
 	for _, c := range tests {
 		if u.wrap(c.x1, c.y1) != u.wrap(c.x2, c.y2) {

@@ -1,4 +1,4 @@
-package main
+package golife
 
 import "testing"
 
@@ -21,7 +21,7 @@ func TestTick(t *testing.T) {
 	}
 
 	for _, c := range tests {
-		u := Tick(newTestUniverse(c.alive, c.neighbours), Conway).(TestUniverse)
+		u := Tick(newTestUniverse(c.alive, c.neighbours), Conway).(testUniverse)
 
 		if u.alive != c.expected {
 			t.Error(
